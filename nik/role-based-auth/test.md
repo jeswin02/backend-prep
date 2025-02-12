@@ -1,37 +1,48 @@
+# Register a new user
+
 curl --location 'http://localhost:5000/api/auth/register' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "username": "testuser",
-  "email": "t@g.com",
-  "password": "password123",
-  "role": "user"
+"username": "testuser",
+"email": "t@g.com",
+"password": "password123",
+"role": "user"
 }'
+
+# Login as the registered user
 
 curl --location 'http://localhost:5000/api/auth/login' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "email": "t@g.com",
-  "password": "password123"
+"email": "t@g.com",
+"password": "password123"
 }'
+
+# Superadmin approves the user
 
 curl --location 'http://localhost:5000/api/users/superadmin/action' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YWM2ZmNjOGU1M2Y3NTE2ZTMyOWJkMyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzM5MzU0MDYwLCJleHAiOjE3MzkzNTc2NjB9.l7sYePUFXyCR_9BBrKXUC1ggU9TmmG10h9JIPIwsIps' \
+--header 'Authorization: Bearer <superadmin_token>' \
 --data '{
-  "userId": "67ac7077cfa61764162fdf30",
-  "action": "approve"
+"userId": "67ac7077cfa61764162fdf30",
+"action": "approve"
 }'
+
+# Login again as the registered user
 
 curl --location 'http://localhost:5000/api/auth/login' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "email": "t@g.com",
-  "password": "password123"
+"email": "t@g.com",
+"password": "password123"
 }'
+
+# Superadmin deactivates the user
 
 curl --location 'http://localhost:5000/api/users/superadmin/action' \
 --header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <superadmin_token>' \
 --data '{
-  "userId": "67ac7077cfa61764162fdf30",
-  "action": "deactivate"
+"userId": "67ac7077cfa61764162fdf30",
+"action": "deactivate"
 }'
