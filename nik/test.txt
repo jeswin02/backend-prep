@@ -1,0 +1,47 @@
+Here are the curl commands to test the API:
+
+1️⃣ Register a User (Pending Approval)
+sh
+Copy
+Edit
+curl -X POST http://localhost:5000/api/auth/register \
+     -H "Content-Type: application/json" \
+     -d '{
+           "username": "testuser",
+           "password": "password123",
+           "role": "user"
+         }'
+2️⃣ Login a User (Only Approved Users Can Login)
+sh
+Copy
+Edit
+curl -X POST http://localhost:5000/api/auth/login \
+     -H "Content-Type: application/json" \
+     -d '{
+           "username": "testuser",
+           "password": "password123"
+         }'
+3️⃣ Super Admin Approves a User
+sh
+Copy
+Edit
+curl -X POST http://localhost:5000/api/users/superadmin/action \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer YOUR_SUPERADMIN_TOKEN" \
+     -d '{
+           "userId": "USER_ID_TO_APPROVE",
+           "action": "approve"
+         }'
+4️⃣ Super Admin Disapproves (Deletes) a User
+sh
+Copy
+Edit
+curl -X POST http://localhost:5000/api/users/superadmin/action \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer YOUR_SUPERADMIN_TOKEN" \
+     -d '{
+           "userId": "USER_ID_TO_DELETE",
+           "action": "disapprove"
+         }'
+🔹 Replace YOUR_SUPERADMIN_TOKEN with the JWT token of a logged-in Super Admin.
+🔹 Replace USER_ID_TO_APPROVE / USER_ID_TO_DELETE with actual user IDs from the database
