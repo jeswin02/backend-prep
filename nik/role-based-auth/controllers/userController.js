@@ -1,6 +1,6 @@
-const User = require('../models/User');
+import User from '../models/User.js';
 
-exports.superAdminAction = async (req, res) => {
+export const superAdminAction = async (req, res) => {
   const { userId, action } = req.body;
   const user = await User.findById(userId);
   if (!user) return res.status(404).json({ message: 'User not found' });
@@ -16,3 +16,4 @@ exports.superAdminAction = async (req, res) => {
   }
   res.status(400).json({ message: 'Invalid action' });
 };
+
