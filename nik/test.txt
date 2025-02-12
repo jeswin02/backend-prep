@@ -45,3 +45,33 @@ curl -X POST http://localhost:5000/api/users/superadmin/action \
          }'
 🔹 Replace YOUR_SUPERADMIN_TOKEN with the JWT token of a logged-in Super Admin.
 🔹 Replace USER_ID_TO_APPROVE / USER_ID_TO_DELETE with actual user IDs from the database
+
+
+
+
+later
+
+cURL Commands to Test:
+🔸 Login as Super Admin
+sh
+Copy
+Edit
+curl -X POST http://localhost:5000/api/auth/login \
+     -H "Content-Type: application/json" \
+     -d '{"username": "superadmin", "password": "superadmin123"}'
+🔸 Super Admin Approving a User
+sh
+Copy
+Edit
+curl -X POST http://localhost:5000/api/users/superadmin/action \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer YOUR_SUPER_ADMIN_TOKEN" \
+     -d '{"userId": "USER_ID", "action": "approve"}'
+🔸 Super Admin Disapproving a User
+sh
+Copy
+Edit
+curl -X POST http://localhost:5000/api/users/superadmin/action \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer YOUR_SUPER_ADMIN_TOKEN" \
+     -d '{"userId": "USER_ID", "action": "disapprove"}'
