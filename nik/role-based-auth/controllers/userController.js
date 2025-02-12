@@ -16,4 +16,3 @@ export const superAdminAction = async (req, res) => {
   }
   res.status(400).json({ message: 'Invalid action' });
 };
-
