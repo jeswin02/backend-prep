@@ -1,6 +1,7 @@
 const express = require('express');
 const { superAdminAction } = require('../controllers/userController');
-const authMiddleware = require('../middlewares/authMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware'); 
+authMiddleware.default = authMiddleware;
 const router = express.Router();
 
 router.post('/superadmin/action', authMiddleware(['superadmin']), superAdminAction);
