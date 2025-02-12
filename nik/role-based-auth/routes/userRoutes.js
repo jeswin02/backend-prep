@@ -1,18 +1,13 @@
 import express from "express";
-import { superAdminAction } from "../controllers/userController.js";
+import {
+  superAdminAction,
+  getPendingUsers,
+} from "../controllers/userController.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.post(
-  "/superadmin/action",
-  // authMiddleware(["superadmin"]),
-  superAdminAction
-);
-router.post(
-  "/superadmin/deactivate",
-  authMiddleware(["superadmin"]),
-  superAdminAction
-);
+router.get("/superadmin", getPendingUsers);
+router.post("/superadmin/action", superAdminAction);
 
 export default router;

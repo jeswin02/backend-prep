@@ -1,4 +1,3 @@
-// index.js
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config.js";
@@ -11,6 +10,9 @@ connectDB().then(seedSuperAdmin);
 
 const app = express();
 app.use(express.json());
+
+// Set EJS as the view engine
+app.set("view engine", "ejs");
 
 // Routes
 app.use("/api/auth", authRoutes);

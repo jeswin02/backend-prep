@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Admin Dashboard</title>
+  </head>
+  <body>
+    <h1>Super Admin Dashboard</h1>
+    <h2>Pending Users</h2>
+    <ul>
+      <% pendingUsers.forEach(user => { %>
+      <li>
+        <%= user.username %> (<%= user.email %>)
+        <button onclick="handleAction('<%= user._id %>', 'approve')">
+          Approve
+        </button>
+        <button onclick="handleAction('<%= user._id %>', 'deactivate')">
+          Deactivate
+        </button>
+      </li>
+      <% }) %>
+    </ul>
+
+    <script>
+      async function handleAction(userId, action) {
+        const response = await fetch("/api/users/superadmin/action", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId, action }),
+        });
+
+        if (response.ok) {
+          window.location.reload();
+        } else {
+          alert("Action failed");
+        }
+      }
+    </script>
+  </body>
+</html>
